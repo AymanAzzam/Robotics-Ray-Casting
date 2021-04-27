@@ -96,7 +96,7 @@ def draw_robot(map_gray, pose):
     theta = pose[2]
     limit = int(ROBOT_SIZE / 2)
     new_map = cv.rectangle(map_rgb, (x - limit, y - limit), (x + limit, y + limit), (0, 0, 255), -1)
-    new_map = cv.line(new_map, (x, y), motion(x, y, theta, limit), (0, 255, 0), 2)
+    new_map = cv.line(new_map, (x, y), motion(x, y, theta, ROBOT_SIZE), (42, 52, 57), 2)
     return new_map
 
 
