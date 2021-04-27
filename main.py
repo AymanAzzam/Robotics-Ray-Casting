@@ -93,9 +93,10 @@ def draw_robot(map_gray, pose):
     map_rgb = cv.cvtColor(map_gray, cv.COLOR_GRAY2RGB)
     x = pose[0]
     y = pose[1]
+    theta = pose[2]
     limit = int(ROBOT_SIZE / 2)
     new_map = cv.rectangle(map_rgb, (x - limit, y - limit), (x + limit, y + limit), (0, 0, 255), -1)
-    new_map = cv.line(new_map, (x, y), (x + limit, y), (0, 255, 0), 2)
+    new_map = cv.line(new_map, (x, y), motion(x, y, theta, limit), (0, 255, 0), 2)
     return new_map
 
 
@@ -105,7 +106,8 @@ if __name__ == "__main__":
     robot_pose = [350, 180, 0]
     if check_robot_position(map_image, robot_pose):
         z = measurements(map_image, robot_pose)
-        print("measurements(cm) = ", z)
+        z_formatted = [round(num, 3) for num in z]
+        print("measurements(cm) = ", z_formatted)
         map_image = draw_robot(map_image, robot_pose)
         cv.imshow("map", map_image)
         cv.waitKey(0)
