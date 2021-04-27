@@ -11,3 +11,6 @@ Run the file main.py using any python IDE or simply run the following command:
 ```python
 python main.py
 ```
+
+### Output Example
+![robot_pose = [370, 180, 180]](output.png)
