@@ -12,5 +12,16 @@ Run the file main.py using any python IDE or simply run the following command:
 python main.py
 ```
 
-### Output Example
+### Example
+Robot pose:
+- x: 370
+- y = 180
+- theta = 180
+
+Robot size = 80cm * 80cm
+
+Pixel size = 4cm * 4cm
+
+Maximum ray length = 12m
+
 ![robot_pose = [370, 180, 180]](output.png)
