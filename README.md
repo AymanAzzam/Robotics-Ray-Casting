@@ -13,15 +13,12 @@ python main.py
 ```
 
 ### Example
-Robot pose:
-- x: 370
-- y = 180
-- theta = 180
-
-Robot size = 80cm * 80cm
-
-Pixel size = 4cm * 4cm
-
-Maximum ray length = 12m
+- Robot pose
+  - x = 370
+  - y = 180
+  - theta = 180
+- Robot size = 80cm * 80cm
+- Pixel size = 4cm * 4cm
+- Maximum ray length = 12m
 
 ![robot_pose = [370, 180, 180]](output.png)
