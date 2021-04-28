@@ -20,5 +20,6 @@ python main.py
 - Robot size = 80cm * 80cm
 - Pixel size = 4cm * 4cm
 - Maximum ray length = 12m
+- angle step = 3 degrees
 
-![robot_pose = [370, 180, 180]](output.png)
+![](output.png)

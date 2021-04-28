@@ -91,7 +91,7 @@ def draw_robot(map_gray, pose):
 if __name__ == "__main__":
     map_image = read_image('Assignment_04_Grid_Map.png')
     # robot_pose = find_empty_space(map)
-    robot_pose = [370, 180, 180]
+    robot_pose = [480, 110, 180]
     if check_robot_position(map_image, robot_pose):
         z = measurements(map_image, robot_pose)
         z_formatted = [round(num, 3) for num in z]
