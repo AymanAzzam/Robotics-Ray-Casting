@@ -3,67 +3,55 @@ import cv2 as cv
 from utility import *
 from constants import *
 
+def ray_helper(map_gray, start_x, start_y, theta, x, y, step):
+    x_new = x
+    y_new = y
+    x, y = motion(start_x, start_y, theta, step * MOTION_STEP)
+    x, y = handle_map_range(map_gray, x, y)
+    step +=1
+    return x, y, x_new, y_new, step
 
 # move the ray till it collide or rich the maximum position
 def ray(map_gray, x, y, theta, end_x, end_y):
     start_x = x
     start_y = y
+    step = 1
     if y <= end_y and x <= end_x:
         while (map_gray[y][x] > THRESHOLD and y < len(map_gray) and x < len(map_gray[0])
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            x_new = x
-            y_new = y
-            x, y = motion(x, y, theta, MOTION_STEP)
-            x, y = handle_map_range(map_gray, x, y)
+            x, y, x_new, y_new, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y >= end_y and x >= end_x:
         while (map_gray[y][x] > THRESHOLD and y >= 0 and x >= 0
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            x_new = x
-            y_new = y
-            x, y = motion(x, y, theta, MOTION_STEP)
-            x, y = handle_map_range(map_gray, x, y)
+            x, y, x_new, y_new, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y <= end_y and x >= end_x:
         while (map_gray[y][x] > THRESHOLD and y < len(map_gray) and x >= 0
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            x_new = x
-            y_new = y
-            x, y = motion(x, y, theta, MOTION_STEP)
-            x, y = handle_map_range(map_gray, x, y)
+            x, y, x_new, y_new, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y >= end_y and x <= end_x:
         while (map_gray[y][x] > THRESHOLD and y >= 0 and x < len(map_gray[0])
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            x_new = x
-            y_new = y
-            x, y = motion(x, y, theta, MOTION_STEP)
-            x, y = handle_map_range(map_gray, x, y)
+            x, y, x_new, y_new, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y <= end_y and x == end_x:
         x_new = x
         while (map_gray[y][x] < THRESHOLD and y < len(map_gray)
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            y_new = y
-            _, y = motion(x, y, theta, MOTION_STEP)
-            _, y = handle_map_range(map_gray, x, y)
+            _, y, _, y_new, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y >= end_y and x == end_x:
         x_new = x
         while (map_gray[y][x] < THRESHOLD and y >= 0
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            y_new = y
-            _, y = motion(x, y, theta, MOTION_STEP)
-            _, y = handle_map_range(map_gray, x, y)
+            _, y, _, y_new, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y == end_y and x >= end_x:
         y_new = y
         while (map_gray[y][x] < THRESHOLD and x >= 0
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            x_new = x
-            x, _ = motion(x, y, theta, MOTION_STEP)
-            x, _ = handle_map_range(map_gray, x, y)
+            x, _, x_new, _, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     elif y == end_y and x <= end_x:
         y_new = y
         while (map_gray[y][x] < THRESHOLD and x > len(map_gray[0])
                and calc_measurement(x, y, start_x, start_y) <= MAX_MEASURE):
-            x_new = x
-            x, _ = motion(x, y, theta, MOTION_STEP)
-            x, _ = handle_map_range(map_gray, x, y)
+            x, _, x_new, _, step = ray_helper(map_gray, start_x, start_y, theta, x, y, step)
     return x_new, y_new
 
 
