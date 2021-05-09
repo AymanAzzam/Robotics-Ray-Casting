@@ -1,4 +1,4 @@
-# Robotics-Ray-Casting
+# Robotics Ray Casting and End Pose Model
 A solution code for [Assignment 4.1](https://drive.google.com/file/d/1jmhn06vdC9rujGcpzrAjy4B_6M3cg77U/view?usp=sharing) of Probabilistic Robotics Book.
 
 ### Dependencies
@@ -6,13 +6,13 @@ A solution code for [Assignment 4.1](https://drive.google.com/file/d/1jmhn06vdC9
 - numpy
 - opencv-python
 
-### Running Assignment 4.1)
+### Running Assignment 4.1) & 4.2)
 Run the file main.py using any python IDE or simply run the following command:
 ```python
 python main.py
 ```
 
-### Example
+### Example on Assignment 4.1)
 - Robot pose
   - x = 370
   - y = 180
