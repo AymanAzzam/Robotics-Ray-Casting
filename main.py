@@ -74,14 +74,15 @@ def measurements(map, pose, opening_angle=250, angle_step=2):
     return z
 
 # draw the robot and it's direction
-def draw_robot(map_gray, pose):
+def draw_robot(map_gray, pose, draw_heading = True):
     map_rgb = cv.cvtColor(map_gray, cv.COLOR_GRAY2RGB)
     x = pose[0]
     y = pose[1]
     theta = pose[2]
     limit = int(ROBOT_SIZE / 2)
     new_map = cv.rectangle(map_rgb, (x - limit, y - limit), (x + limit, y + limit), (0, 0, 255), -1)
-    new_map = cv.line(new_map, (x, y), motion(x, y, theta, ROBOT_SIZE), (42, 52, 57), 2)
+    if draw_heading:
+        new_map = cv.line(new_map, (x, y), motion(x, y, theta, ROBOT_SIZE), (42, 52, 57), 2)
     return new_map
 
 def assignment_4_2(map_gray, z, opening_angle=250, angle_step=2):    
@@ -109,13 +110,14 @@ def assignment_4_2(map_gray, z, opening_angle=250, angle_step=2):
     position = -1, -1
     if maximum > 0: 
         array_2d = [[(x / maximum) * 255 for x in y] for y in array_2d]
-        array_2d = np.array(array_2d)
-        cv.imshow("end point model", array_2d)
-        cv.waitKey(0)
         for y in range(len(array_2d)):
             for x in range(len(array_2d[0])):
                 if array_2d[y][x] == 255:
                     position = x, y 
+        map_robot = cv.cvtColor(map_gray, cv.COLOR_GRAY2RGB)
+        map_robot = cv.circle(map_robot, position , 5, (0, 255, 0), -1)
+        cv.imshow("end point model", map_robot)
+        cv.waitKey(0)
     print()
     print("Robot position (x, y) = ", position)
     return position
